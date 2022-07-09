@@ -2,6 +2,13 @@
 
 (Work in progress, very experimental project)
 
+## Architecture
+
+```
+Virtual 3D world
+[UnityWebRequest]------ REST ------[Live Chat]
+```
+
 ## Config.cs
 
 "Config.cs" is not included in this repo for security/privacy reasons. Create "Config.cs" with the following constants in the "Scripts" folder:
