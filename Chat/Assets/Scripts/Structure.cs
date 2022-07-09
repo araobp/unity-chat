@@ -33,3 +33,22 @@ public class ChasitorInit
     public bool receiveQueueUpdates { get; }  = true;
     public bool isPost { get; }  = true;
 }
+
+public class Messages
+{
+    public List<Message> messages;
+    public int offset;
+    public int sequence;
+}
+
+public class Message
+{
+    public string type;
+    public ChatMessage message;
+}
+
+public class ChatMessage
+{
+    public string name;
+    public string text;
+} 
