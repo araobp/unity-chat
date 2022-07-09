@@ -11,7 +11,7 @@ Virtual 3D world
 
 ## Config.cs
 
-"Config.cs" is not included in this repo for security/privacy reasons. Create "Config.cs" with the following constants in the "Scripts" folder:
+"Config.cs" is a config file for this application. However, it is not included in this repo for security/privacy reasons. Create "Config.cs" with the following constants in the "Scripts" folder:
 
 ```
 using UnityEngine;
