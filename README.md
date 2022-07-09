@@ -4,7 +4,7 @@
 
 ## Config.cs
 
-"Config.cs" is not included in this repo for security/privacy reasons. Create "Config.cs" with the following constants:
+"Config.cs" is not included in this repo for security/privacy reasons. Create "Config.cs" with the following constants in the "Scripts" folder:
 
 ```
 using System.Collections;
