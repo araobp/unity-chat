@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -24,17 +23,6 @@ public class RestClient : MonoBehaviour
 
     const string CONTENT_TYPE = "application/json";
 
-    /*** Salesforce Live Chat REST API request headers ***/
-    const string X_LIVEAGENT_API_VERSION = "X-LIVEAGENT-API-VERSION";
-    const string X_LIVEAGENT_AFFINITY = "X-LIVEAGENT-AFFINITY";
-    const string X_LIVEAGENT_SESSION_KEY = "X-LIVEAGENT-SESSION-KEY";
-    const string X_LIVEAGENT_SEQUENCE = "X-LIVEAGENT-SEQUENCE";
-
-    const string xLiveagentApiVersion = "55";
-    string xLiveagentAffinity = "";
-    string xLiveagentSessionKey = "";
-    string xLiveagentSequence = "";
-
     /*** REST APIs ***/
 
     public delegate void CallbackGet(bool err, string text);
@@ -49,7 +37,7 @@ public class RestClient : MonoBehaviour
         return text.Replace("\"", "").Trim(TRIM_CHARS).Split(',');
     }
 
-    public void Get(EndPoint endPoint, string path, CallbackGet callback)
+    public void Get(EndPoint endPoint, string path, Hashtable headers, CallbackGet callback)
     {
         _Get(new API(endPoint, path), (err, res) =>
         {
@@ -62,10 +50,10 @@ public class RestClient : MonoBehaviour
             {
                 callback(false, res.text);
             }
-        });
+        }, headers);
     }
 
-    public void Post(EndPoint endPoint, string path, string jsonBody, CallbackPost callback)
+    public void Post(EndPoint endPoint, string path, Hashtable headers, string jsonBody, CallbackPost callback)
     {
         byte[] body = System.Text.Encoding.UTF8.GetBytes(jsonBody);
         _Post(new API(endPoint, path), null, body, (err, res) =>
@@ -79,7 +67,7 @@ public class RestClient : MonoBehaviour
             {
                 callback(false);
             }
-        });
+        }, headers);
     }
 
     public void Put(EndPoint endPoint, string path, string jsonBody, CallbackPut callback)
@@ -119,9 +107,9 @@ public class RestClient : MonoBehaviour
 
     delegate void Callback(bool err, DownloadHandler downloadHandler);
 
-    void _Post(API api, WWWForm postData, byte[] body, Callback callback)
+    void _Post(API api, WWWForm postData, byte[] body, Callback callback, Hashtable headers)
     {
-        StartCoroutine(Request(api, Method.POST, postData, body, callback));
+        StartCoroutine(Request(api, Method.POST, postData, body, callback, headers));
     }
 
     void _Put(API api, byte[] body, Callback callback)
@@ -129,9 +117,9 @@ public class RestClient : MonoBehaviour
         StartCoroutine(Request(api, Method.PUT, null, body, callback));
     }
 
-    void _Get(API api, Callback callback)
+    void _Get(API api, Callback callback, Hashtable headers)
     {
-        StartCoroutine(Request(api, Method.GET, null, null, callback));
+        StartCoroutine(Request(api, Method.GET, null, null, callback, headers));
     }
 
     void _Delete(API api, byte[] body, Callback callback)
@@ -139,41 +127,46 @@ public class RestClient : MonoBehaviour
         StartCoroutine(Request(api, Method.DELETE, null, body, callback));
     }
 
-    void SetHeaders(UnityWebRequest webRequest, EndPoint endPoint)
+    void SetHeaders(UnityWebRequest webRequest, Hashtable headers)
     {
         webRequest.SetRequestHeader("Accept", CONTENT_TYPE);
-        webRequest.SetRequestHeader(X_LIVEAGENT_API_VERSION, xLiveagentApiVersion);
-        webRequest.SetRequestHeader(X_LIVEAGENT_AFFINITY, "null");
-        //webRequest.SetRequestHeader("Authorization", endPoint.credential);
+        if (headers != null)
+        {
+            foreach (DictionaryEntry h in headers)
+            {
+                Debug.Log($"{h.Key}: {h.Value}");
+                webRequest.SetRequestHeader(h.Key.ToString(), h.Value.ToString());
+            }
+        }
     }
 
-    IEnumerator Request(API api, Method m, WWWForm form, byte[] body, Callback callback, bool isFile = false)
+    IEnumerator Request(API api, Method m, WWWForm form, byte[] body, Callback callback, Hashtable headers = null)
     {
         UnityWebRequest webRequest;
-        string uri = api.endPoint.endPoint + api.path;
+        string uri = api.endPoint.baseUrl + api.path;
         Debug.Log(uri);
 
         switch (m)
         {
             case Method.GET:
                 webRequest = UnityWebRequest.Get(uri);
-                SetHeaders(webRequest, api.endPoint);
+                SetHeaders(webRequest, headers);
                 break;
             case Method.PUT:
                 webRequest = UnityWebRequest.Put(uri, body);
-                SetHeaders(webRequest, api.endPoint);
+                SetHeaders(webRequest, headers);
                 webRequest.uploadHandler.contentType = CONTENT_TYPE;
                 break;
             case Method.POST:
                 webRequest = UnityWebRequest.Post(uri, form);
-                SetHeaders(webRequest, api.endPoint);
+                SetHeaders(webRequest, headers);
                 UploadHandlerRaw uh2 = new UploadHandlerRaw(body);
                 uh2.contentType = CONTENT_TYPE;
                 webRequest.uploadHandler = uh2;
                 break;
             case Method.DELETE:
                 webRequest = UnityWebRequest.Delete(uri);
-                SetHeaders(webRequest, api.endPoint);
+                SetHeaders(webRequest, headers);
                 UploadHandlerRaw uh3 = new UploadHandlerRaw(body);
                 uh3.contentType = CONTENT_TYPE;
                 webRequest.uploadHandler = uh3;
@@ -181,7 +174,7 @@ public class RestClient : MonoBehaviour
                 break;
             default:
                 webRequest = UnityWebRequest.Get(uri);
-                SetHeaders(webRequest, api.endPoint);
+                SetHeaders(webRequest, headers);
                 break;
         }
 

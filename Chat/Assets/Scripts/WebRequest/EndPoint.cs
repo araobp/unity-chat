@@ -1,18 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 public class EndPoint
 {
-    public string serverAddress;
     public string baseUrl;
-    public string login = "";
-    public string password = "";
 
-    public string endPoint
-    {
-        get => serverAddress + baseUrl;
-    }
+    //public string login = "";
+    //public string password = "";
 
+    /*
     public string credential
     {
         get
@@ -24,4 +21,5 @@ public class EndPoint
             return $"Basic {credentialBase64}";
         }
     }
+    */
 }
