@@ -1,4 +1,4 @@
-# Salesforce Live Chat integration with Unity
+# Salesforce Chat integration with Unity
 
 (Work in progress, very experimental project)
 
@@ -12,7 +12,7 @@
 
 ```
 Virtual 3D world
-[UnityWebRequest]------ REST ------[Live Chat]
+[UnityWebRequest]------ REST ------[Salesforce Chat]
 ```
 
 ## Config.cs
