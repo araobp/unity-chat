@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class TestClient : RestClient
 {
@@ -15,8 +16,6 @@ public class TestClient : RestClient
 
     EndPoint ep;
     SessionId sessionId;
-
-    int seq = 0;
 
     float timer;
     const float PERIOD = 3F;
@@ -42,7 +41,7 @@ public class TestClient : RestClient
             headers.Add(LiveAgentHeader.X_LIVEAGENT_API_VERSION, Config.API_VERSION);
             headers.Add(LiveAgentHeader.X_LIVEAGENT_AFFINITY, sessionId.affinityToken);
             headers.Add(LiveAgentHeader.X_LIVEAGENT_SESSION_KEY, sessionId.key);
-            headers.Add(LiveAgentHeader.X_LIVEAGENT_SEQUENCE, ++seq);
+            headers.Add(LiveAgentHeader.X_LIVEAGENT_SEQUENCE, 1);
 
             ChasitorInit init = new ChasitorInit
             {
@@ -56,11 +55,28 @@ public class TestClient : RestClient
             });
 
         });
+
+        inputField.onEndEdit.AddListener(OnEndEdit);
     }
 
     public void OnEndEdit(string message) {
+        string inputText = inputField.text;
         inputField.text = "";
+        Hashtable headers = new Hashtable();
+        headers.Add(LiveAgentHeader.X_LIVEAGENT_API_VERSION, Config.API_VERSION);
+        headers.Add(LiveAgentHeader.X_LIVEAGENT_AFFINITY, sessionId.affinityToken);
+        headers.Add(LiveAgentHeader.X_LIVEAGENT_SESSION_KEY, sessionId.key);
 
+        ChatMessageFromClient body = new ChatMessageFromClient();
+        body.text = inputText;
+
+        Post(ep, "Chasitor/ChatMessage", headers, JsonConvert.SerializeObject(body), (err) =>
+        {
+            Debug.Log(JsonConvert.SerializeObject(body));
+            Debug.Log(err);
+
+            chatMessages.text = chatMessages.text + "\n" + $"{Config.VISITOR_NAME}: {inputText}";
+        });
     }
 
     Hashtable headers = new Hashtable();
@@ -87,7 +103,10 @@ public class TestClient : RestClient
                     string agentName = messages.messages[0].message.name;
                     string messageFromAgent = messages.messages[0].message.text;
                     Debug.Log($"{agentName}: {messageFromAgent}");
-                    chatMessages.text = $"{agentName}: {messageFromAgent}";
+                    if (messageFromAgent != null)
+                    {
+                        chatMessages.text = chatMessages.text + "\n"+ $"{ agentName}: {messageFromAgent}";
+                    }
                 }
                 catch(Exception e)
                 {
@@ -96,5 +115,6 @@ public class TestClient : RestClient
                 waiting = false;
             });
         }
+
     }
 }

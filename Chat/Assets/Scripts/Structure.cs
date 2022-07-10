@@ -44,11 +44,16 @@ public class Messages
 public class Message
 {
     public string type;
-    public ChatMessage message;
+    public ChatMessageFromAgent message;
 }
 
-public class ChatMessage
+public class ChatMessageFromAgent
 {
     public string name;
     public string text;
-} 
+}
+
+public class ChatMessageFromClient
+{
+    public string text;
+}
