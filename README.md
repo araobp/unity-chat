@@ -2,6 +2,11 @@
 
 (Work in progress, very experimental project)
 
+## Use cases
+
+- Virtual showrooms
+- Virtual retail stores
+
 ## Architecture
 
 ```
