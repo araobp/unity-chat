@@ -24,7 +24,7 @@ using UnityEngine;
 
 public class Config : MonoBehaviour
 {
-    public const string BASE_URL = "<Live chat REST server host>/chat/rest/";
+    public const string BASE_URL = "<Salesforce Chat REST server host>/chat/rest/";
     public const string ORGANIZATION_ID = "<your company's organization ID";
     public const string DEPLOYMENT_ID = "<deployment ID>";
     public const string BUTTON_ID = "<button ID>";
