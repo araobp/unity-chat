@@ -5,6 +5,7 @@
 ## Use cases
 
 - Virtual showrooms
+- Virtual exhibitions
 - Virtual retail stores
 
 ## Architecture
