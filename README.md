@@ -2,20 +2,22 @@
 
 (Work in progress, very experimental project)
 
+## Architecture idea
+
+```
+  [Unity]--- Some chat protocol ---[Gateway/SpringBoot]---------[Einstein Chat]
+  
+```
+
 ## Use cases
 
 - Virtual showrooms
 - Virtual exhibitions
 - Virtual retail stores
 
-## Architecture
+## Experiment 1: REST API test (with Salesforce chat)
 
-```
-Virtual 3D world
-[UnityWebRequest]------ REST ------[Salesforce Chat]
-```
-
-## Config.cs
+### Config.cs
 
 "Config.cs" is a config file for this application. However, it is not included in this repo for security/privacy reasons. Create "Config.cs" with the following constants in the "Scripts" folder:
 
