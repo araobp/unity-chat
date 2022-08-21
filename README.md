@@ -1,6 +1,6 @@
 # Salesforce Einstein Bot integration with Unity
 
-(Work in progress, very experimental project)
+(Work in progress, very experimental project, still in very eary stage)
 
 ## Architecture idea
 
