@@ -5,11 +5,14 @@
 ## Architecture idea
 
 ```
-  [Unity]--- Some chat protocol ---[Gateway/SpringBoot]---------[Einstein Chat]
-  
+                                                                Conncted App
+  [Unity]---- Photon? ----[Gateway / Einstein Bot SDK / SpringBoot]-----[Einstein Bot w/ Knowledge base]
+                             |                                    OAuth2
+  [Other chat services]------+                                    Chat messaging
+
 ```
 
-## Use cases
+## Metaverse use cases
 
 - Virtual showrooms
 - Virtual exhibitions
