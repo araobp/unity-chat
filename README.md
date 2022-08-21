@@ -1,4 +1,4 @@
-# Salesforce Chat integration with Unity
+# Salesforce Einstein Bot integration with Unity
 
 (Work in progress, very experimental project)
 
