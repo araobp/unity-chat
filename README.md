@@ -48,4 +48,4 @@ public class Config : MonoBehaviour
 - [UnityWebRequest](https://docs.unity3d.com/2022.2/Documentation/ScriptReference/Networking.UnityWebRequest.html)
 - [Understanding Chat REST Resources](https://developer.salesforce.com/docs/atlas.en-us.live_agent_rest.meta/live_agent_rest/live_agent_rest_understanding_resources.htm)
 - https://help.salesforce.com/s/articleView?id=000331168&type=1
-
+- [Get Started with Einstein Bots API](https://developer.salesforce.com/docs/service/einstein-bot-api/guide/prerequisites.html)
