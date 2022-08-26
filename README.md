@@ -1,5 +1,9 @@
 # Salesforce Einstein Bot integration with Unity
 
+Unfortunately, this project is terminated due to [this announcement](https://blog.heroku.com/next-chapter).
+
+---
+
 (Work in progress, very experimental, still in very early stage)
 
 ## Architecture idea
