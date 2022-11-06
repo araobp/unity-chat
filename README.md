@@ -5,7 +5,6 @@ I lost my interest in this field after overwork in October 2022, so I terminate 
 There are a lot of chat services in VR space:
 - VRChat
 - Photon
-    :
 
 Once I used Photon for prototyping AR with younger people. Photon was nice.
 
