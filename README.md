@@ -1,6 +1,13 @@
 # Salesforce Einstein Bot integration with Unity
 
-Unfortunately, this project is terminated due to [this announcement](https://blog.heroku.com/next-chapter).
+I lost my interest in this field after overwork in October 2022, so I terminate this project.
+
+There are a lot of chat services in VR space:
+- VRChat
+- Photon
+    :
+
+Once I used Photon for prototyping AR with younger people. Photon was nice.
 
 ---
 
