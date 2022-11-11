@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 using TMPro;
 
-public class TestClient : RestClient
+public class SalesforceChat : RestClient
 {
 
     [SerializeField]
