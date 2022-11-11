@@ -23,7 +23,7 @@ It also means Salesforce CRM integration with Unity.
 - Virtual retail stores
 - Virtual sightseeing
 
-## REST API message sequence diagram
+## Salesforce Chat REST API message sequence diagram
 
 ```
 
