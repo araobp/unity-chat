@@ -4,7 +4,7 @@ It also means Salesforce CRM integration with Unity.
 
 ```
 
-                                           Objects: LiveChatTranscript, Case, Lead
+                                           Objects: LiveChatTranscript, Case, Lead ...
                                                                ^
                                                                |
                                                             Pop up
