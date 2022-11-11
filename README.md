@@ -1,36 +1,12 @@
-# Salesforce Einstein Bot integration with Unity
+# Salesforce Chat integration with Unity
 
-I lost my interest in this field after overwork in October 2022, so I terminate this project.
+## Potential use cases
 
-There are a lot of chat services in VR space:
-- VRChat
-- Photon
-
-Once I used Photon for prototyping AR with younger people. Photon was nice.
-
----
-
-(Work in progress, very experimental, still in very early stage)
-
-## Architecture idea
-
-```
-                                                                Conncted App
-  [Unity]---- Photon? ----[Gateway / Einstein Bot SDK / SpringBoot]-----[Einstein Bot w/ Knowledge base]
-                             |                                    OAuth2
-  [Other chat services]------+                                    Chat messaging
-
-```
-
-## Metaverse use cases
-
-- Virtual showrooms
-- Virtual exhibitions
+- Virtual housing exhibition
 - Virtual retail stores
+- Virtual sightseeing
 
-## Experiment 1: REST API test (with Salesforce chat)
-
-### Config.cs
+## Config.cs
 
 "Config.cs" is a config file for this application. However, it is not included in this repo for security/privacy reasons. Create "Config.cs" with the following constants in the "Scripts" folder:
 
@@ -55,8 +31,5 @@ public class Config : MonoBehaviour
 
 ## References
 
-- [UnityWebRequest](https://docs.unity3d.com/2022.2/Documentation/ScriptReference/Networking.UnityWebRequest.html)
-- [Understanding Chat REST Resources](https://developer.salesforce.com/docs/atlas.en-us.live_agent_rest.meta/live_agent_rest/live_agent_rest_understanding_resources.htm)
-- https://help.salesforce.com/s/articleView?id=000331168&type=1
-- https://developer.salesforce.com/docs/atlas.en-us.noversion.service_sdk_ios.meta/service_sdk_ios/live_agent_cloud_setup_get_settings.htm
-- [Get Started with Einstein Bots API](https://developer.salesforce.com/docs/service/einstein-bot-api/guide/prerequisites.html)
+- [Chat REST API Developer Guide](https://resources.docs.salesforce.com/240/latest/en-us/sfdc/pdf/chat_rest.pdf)
+- [Get Chat Settings from Your Org](https://developer.salesforce.com/docs/atlas.en-us.noversion.service_sdk_ios.meta/service_sdk_ios/live_agent_cloud_setup_get_settings.htm)
