@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 208830092}
   - component: {fileID: 208830091}
   m_Layer: 5
-  m_Name: TextChat
+  m_Name: TextChatMessages
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,8 +328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df4577e2a18b419f821bac992c44ec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chatMessages: {fileID: 208830091}
-  inputField: {fileID: 1579999431}
+  m_ChatMessages: {fileID: 208830091}
+  m_InputField: {fileID: 1579999431}
 --- !u!4 &826493226
 Transform:
   m_ObjectHideFlags: 0

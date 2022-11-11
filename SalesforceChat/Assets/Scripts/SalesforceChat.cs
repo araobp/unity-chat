@@ -1,24 +1,23 @@
 using Newtonsoft.Json;
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using System;
-using TMPro;
 
 public class SalesforceChat : RestClient
 {
 
     [SerializeField]
-    Text chatMessages;
+    Text m_ChatMessages;
 
     [SerializeField]
-    InputField inputField;
+    InputField m_InputField;
 
     EndPoint ep;
-    SessionId sessionId;
 
-    float timer;
+    float m_Timer;
     const float PERIOD = 3F;
+
+    Headers m_Headers = new Headers();
 
     // Start is called before the first frame update
     void Start()
@@ -26,76 +25,56 @@ public class SalesforceChat : RestClient
         ep = new EndPoint();
         ep.baseUrl = Config.BASE_URL;
 
-        Hashtable headers = new Hashtable
+        Get(ep, "System/SessionId", m_Headers.headers, (err, text) =>
         {
-            { LiveAgentHeader.X_LIVEAGENT_API_VERSION, Config.API_VERSION },
-            { LiveAgentHeader.X_LIVEAGENT_AFFINITY, "null" }
-        };
-
-        Get(ep, "System/SessionId", headers, (err, text) =>
-        {
-            sessionId = JsonConvert.DeserializeObject<SessionId>(text);
+            SessionId sessionId = JsonConvert.DeserializeObject<SessionId>(text);
             Debug.Log($"{sessionId.id}, {sessionId.key}, {sessionId.affinityToken}, {sessionId.clientPollTimeout}");
+            m_Headers.affinity = sessionId.affinityToken;
+            m_Headers.sessionKey = sessionId.key;
 
-            headers.Clear();
-            headers.Add(LiveAgentHeader.X_LIVEAGENT_API_VERSION, Config.API_VERSION);
-            headers.Add(LiveAgentHeader.X_LIVEAGENT_AFFINITY, sessionId.affinityToken);
-            headers.Add(LiveAgentHeader.X_LIVEAGENT_SESSION_KEY, sessionId.key);
-            headers.Add(LiveAgentHeader.X_LIVEAGENT_SEQUENCE, 1);
-
-            ChasitorInit init = new ChasitorInit
+            ChasitorInit chasitorInit = new ChasitorInit
             {
                 sessionId = sessionId.id
             };
 
-            Post(ep, "Chasitor/ChasitorInit", headers, JsonConvert.SerializeObject(init), (err) =>
+            Post(ep, "Chasitor/ChasitorInit", m_Headers.headers, JsonConvert.SerializeObject(chasitorInit), (err) =>
             {
-                Debug.Log(JsonConvert.SerializeObject(init));
+                Debug.Log(JsonConvert.SerializeObject(chasitorInit));
                 Debug.Log(err);
             });
 
         });
 
-        inputField.onEndEdit.AddListener(OnEndEdit);
+        m_InputField.onEndEdit.AddListener(OnEndEdit);
     }
 
     public void OnEndEdit(string message) {
-        string inputText = inputField.text;
-        inputField.text = "";
-        Hashtable headers = new Hashtable();
-        headers.Add(LiveAgentHeader.X_LIVEAGENT_API_VERSION, Config.API_VERSION);
-        headers.Add(LiveAgentHeader.X_LIVEAGENT_AFFINITY, sessionId.affinityToken);
-        headers.Add(LiveAgentHeader.X_LIVEAGENT_SESSION_KEY, sessionId.key);
+        string inputText = m_InputField.text;
+        m_InputField.text = "";
 
         ChatMessageFromClient body = new ChatMessageFromClient();
         body.text = inputText;
 
-        Post(ep, "Chasitor/ChatMessage", headers, JsonConvert.SerializeObject(body), (err) =>
+        Post(ep, "Chasitor/ChatMessage", m_Headers.headers, JsonConvert.SerializeObject(body), (err) =>
         {
             Debug.Log(JsonConvert.SerializeObject(body));
             Debug.Log(err);
 
-            chatMessages.text = chatMessages.text + "\n" + $"{Config.VISITOR_NAME}: {inputText}";
+            m_ChatMessages.text = m_ChatMessages.text + "\n" + $"{Config.VISITOR_NAME}: {inputText}";
         });
     }
 
-    Hashtable headers = new Hashtable();
     bool waiting = false;
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= PERIOD && !waiting)
+        m_Timer += Time.deltaTime;
+        if (m_Timer >= PERIOD && !waiting)
         {
-            timer = 0F;
-            Debug.Log("Zero clear");
-            headers.Clear();
-            headers.Add(LiveAgentHeader.X_LIVEAGENT_API_VERSION, Config.API_VERSION);
-            headers.Add(LiveAgentHeader.X_LIVEAGENT_AFFINITY, sessionId.affinityToken);
-            headers.Add(LiveAgentHeader.X_LIVEAGENT_SESSION_KEY, sessionId.key);
+            m_Timer = 0F;
             waiting = true;
-            Get(ep, "System/Messages", headers, (err, text) =>
+            Get(ep, "System/Messages", m_Headers.headers, (err, text) =>
             {
                 try
                 {
@@ -105,7 +84,7 @@ public class SalesforceChat : RestClient
                     Debug.Log($"{agentName}: {messageFromAgent}");
                     if (messageFromAgent != null)
                     {
-                        chatMessages.text = chatMessages.text + "\n"+ $"{ agentName}: {messageFromAgent}";
+                        m_ChatMessages.text = m_ChatMessages.text + "\n"+ $"{ agentName}: {messageFromAgent}";
                     }
                 }
                 catch(Exception e)
