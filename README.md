@@ -1,10 +1,56 @@
 # Salesforce Chat integration with Unity
 
+It also means Salesforce CRM integration with Unity.
+
+```
+    VIRTUAL WORLD                                         REAL WORLD
+
+                                           Objects: LiveChatTranscript, Case, Lead ...
+                                                               ^
+                                                               |
+                                                            Pop up
+                                                               |
+       Unity ---------- Chat initiation ------------> Salesforce Service Console
+     3D Games
+     Digital Twin 
+     Metaverse
+
+```
+
 ## Potential use cases
 
 - Virtual housing exhibition
 - Virtual retail stores
 - Virtual sightseeing
+
+## Salesforce Chat REST API message sequence diagram
+
+```
+
+  Unity                                 Salesforce Platform
+
+    Initializing a chat session
+    |                                            |
+    |------- GET System/SessionId -------------->|
+    |<------ 200 OK -----------------------------|
+    |                                            |
+    |------- POST Chasitor/ChasitorInit -------->|
+    |<------ 200 OK -----------------------------|
+    |                                            |
+    
+    Sending a message to the agent
+    |                                            |
+    |------- POST Chasitor/ChatMessage --------->|
+    |<------ 200 OK -----------------------------|
+    |                                            |
+    
+    Polling for fetching a message from the agent
+    |                                            |
+    |------- GET System/Messages --------------->|
+    |------- 200 OK -----------------------------|
+    |                                            |
+
+```
 
 ## Config.cs
 
@@ -28,6 +74,8 @@ public class Config : MonoBehaviour
     public const string API_VERSION = "55";
 }
 ```
+
+Refer to [this document](https://developer.salesforce.com/docs/atlas.en-us.noversion.service_sdk_ios.meta/service_sdk_ios/live_agent_cloud_setup_get_settings.htm) to get your chat settings from your organization.
 
 ## References
 
