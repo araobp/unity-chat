@@ -9,28 +9,66 @@ public static class LiveAgentHeader
     public const string X_LIVEAGENT_SEQUENCE = "X-LIVEAGENT-SEQUENCE";
 }
 
+public enum State {
+    INITIALIZING,
+    INITIALIZED,
+    MESSAGING
+}
+
 public class Headers
 {
     private Hashtable m_Headers;
+    private Hashtable m_HeadersForMessages;
     private int m_SeqNo;
+    private State m_State;
 
     public Headers() {
+        m_State = State.INITIALIZING;
         m_SeqNo = 1;
         m_Headers = new Hashtable()
         {
             { LiveAgentHeader.X_LIVEAGENT_API_VERSION, Config.API_VERSION },
             { LiveAgentHeader.X_LIVEAGENT_AFFINITY, "null" }
         };
+        m_HeadersForMessages = (Hashtable)m_Headers.Clone();
+    }
+
+    public State state
+    {
+        set
+        {
+            m_State = value;
+            if (m_State == State.INITIALIZED)
+            {
+                m_HeadersForMessages[LiveAgentHeader.X_LIVEAGENT_AFFINITY] = m_Headers[LiveAgentHeader.X_LIVEAGENT_AFFINITY];
+                m_HeadersForMessages[LiveAgentHeader.X_LIVEAGENT_SESSION_KEY] = m_Headers[LiveAgentHeader.X_LIVEAGENT_SESSION_KEY];
+            }
+        }
+        get => m_State;
     }
 
     public Hashtable headers
     {
         get {
-            if (m_Headers.ContainsKey(LiveAgentHeader.X_LIVEAGENT_SESSION_KEY))
+            if (m_State != State.INITIALIZING)
             {
                 m_Headers[LiveAgentHeader.X_LIVEAGENT_SEQUENCE] = m_SeqNo++;
             }
             return m_Headers;
+        }
+    }
+
+    public Hashtable headersForMessages
+    {
+        get
+        {
+            if (m_State == State.MESSAGING)
+            {
+                return m_HeadersForMessages;
+            } else
+            {
+                throw new System.Exception("Not in MESSAGING state");
+            }
         }
     }
 

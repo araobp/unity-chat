@@ -30,13 +30,6 @@ public class RestClient : MonoBehaviour
     public delegate void CallbackPut(bool err, string text = null);
     public delegate void CallbackDelete(bool err);
 
-    static char[] TRIM_CHARS = { '[', ']' };
-
-    string[] ToStringArray(string text)
-    {
-        return text.Replace("\"", "").Trim(TRIM_CHARS).Split(',');
-    }
-
     public void Get(EndPoint endPoint, string path, Hashtable headers, CallbackGet callback)
     {
         _Get(new API(endPoint, path), (err, res) =>

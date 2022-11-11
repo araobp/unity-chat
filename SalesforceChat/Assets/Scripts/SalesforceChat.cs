@@ -14,10 +14,11 @@ public class SalesforceChat : RestClient
 
     EndPoint ep;
 
-    float m_Timer;
-    const float PERIOD = 3F;
+    bool m_Waiting = false;
 
     Headers m_Headers = new Headers();
+
+    int m_Ack = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,8 @@ public class SalesforceChat : RestClient
             m_Headers.affinity = sessionId.affinityToken;
             m_Headers.sessionKey = sessionId.key;
 
+            m_Headers.state = State.INITIALIZED;
+
             ChasitorInit chasitorInit = new ChasitorInit
             {
                 sessionId = sessionId.id
@@ -41,6 +44,7 @@ public class SalesforceChat : RestClient
             {
                 Debug.Log(JsonConvert.SerializeObject(chasitorInit));
                 Debug.Log(err);
+                m_Headers.state = State.MESSAGING;
             });
 
         });
@@ -48,52 +52,56 @@ public class SalesforceChat : RestClient
         m_InputField.onEndEdit.AddListener(OnEndEdit);
     }
 
-    public void OnEndEdit(string message) {
-        string inputText = m_InputField.text;
-        m_InputField.text = "";
-
-        ChatMessageFromClient body = new ChatMessageFromClient();
-        body.text = inputText;
-
-        Post(ep, "Chasitor/ChatMessage", m_Headers.headers, JsonConvert.SerializeObject(body), (err) =>
+    public void OnEndEdit(string message)
+    {
+        if (m_Headers.state == State.MESSAGING)
         {
-            Debug.Log(JsonConvert.SerializeObject(body));
-            Debug.Log(err);
+            string inputText = m_InputField.text;
+            m_InputField.text = "";
 
-            m_ChatMessages.text = m_ChatMessages.text + "\n" + $"{Config.VISITOR_NAME}: {inputText}";
-        });
+            ChatMessageFromClient body = new ChatMessageFromClient();
+            body.text = inputText;
+
+            Post(ep, "Chasitor/ChatMessage", m_Headers.headers, JsonConvert.SerializeObject(body), (err) =>
+            {
+                Debug.Log(JsonConvert.SerializeObject(body));
+                Debug.Log(err);
+
+                m_ChatMessages.text = m_ChatMessages.text + "\n" + $"{Config.VISITOR_NAME}: {inputText}";
+            });
+        }
     }
-
-    bool waiting = false;
 
     // Update is called once per frame
     void Update()
     {
-        m_Timer += Time.deltaTime;
-        if (m_Timer >= PERIOD && !waiting)
+        if (m_Headers.state == State.MESSAGING && !m_Waiting)
         {
-            m_Timer = 0F;
-            waiting = true;
-            Get(ep, "System/Messages", m_Headers.headers, (err, text) =>
+            // Long polling
+            m_Waiting = true;
+            Get(ep, $"System/Messages?ack={m_Ack}", m_Headers.headersForMessages, (err, text) =>
             {
                 try
                 {
                     Messages messages = JsonConvert.DeserializeObject<Messages>(text);
-                    string agentName = messages.messages[0].message.name;
-                    string messageFromAgent = messages.messages[0].message.text;
-                    Debug.Log($"{agentName}: {messageFromAgent}");
-                    if (messageFromAgent != null)
+                    m_Ack = messages.sequence;
+                    foreach (Message message in messages.messages)
                     {
-                        m_ChatMessages.text = m_ChatMessages.text + "\n"+ $"{ agentName}: {messageFromAgent}";
+                        string agentName = message.message.name;
+                        string messageFromAgent = message.message.text;
+                        Debug.Log($"{agentName}: {messageFromAgent}");
+                        if (messageFromAgent != null)
+                        {
+                            m_ChatMessages.text = m_ChatMessages.text + "\n" + $"{agentName}: {messageFromAgent}";
+                        }
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Debug.Log(e.StackTrace);
                 }
-                waiting = false;
+                m_Waiting = false;
             });
         }
-
     }
 }

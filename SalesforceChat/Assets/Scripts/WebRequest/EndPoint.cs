@@ -6,10 +6,9 @@ public class EndPoint
 {
     public string baseUrl;
 
-    //public string login = "";
-    //public string password = "";
+    public string login = "";
+    public string password = "";
 
-    /*
     public string credential
     {
         get
@@ -21,5 +20,4 @@ public class EndPoint
             return $"Basic {credentialBase64}";
         }
     }
-    */
 }
