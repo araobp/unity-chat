@@ -1,5 +1,21 @@
 # Salesforce Chat integration with Unity
 
+It also means Salesforce CRM integration with Unity.
+
+```
+
+                                           Objects: LiveChatTranscript, Case, Lead
+                                                               ^
+                                                               |
+                                                            Pop up
+                                                               |
+       Unity ---------- Chat initiation ------------> Salesforce Service Console
+     3D Games
+     Digital Twin 
+     Metaverse
+
+```
+
 ## Potential use cases
 
 - Virtual housing exhibition
