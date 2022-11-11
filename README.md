@@ -6,6 +6,35 @@
 - Virtual retail stores
 - Virtual sightseeing
 
+## REST API message sequence diagram
+
+```
+
+  Unity                                 Salesforce Platform
+
+    Initializing a chat session
+    |                                            |
+    |------- GET System/SessionId -------------->|
+    |<------ 200 OK -----------------------------|
+    |                                            |
+    |------- POST Chasitor/ChasitorInit -------->|
+    |<------ 200 OK -----------------------------|
+    |                                            |
+    
+    Sending a message to the agent
+    |                                            |
+    |------- POST Chasitor/ChatMessage --------->|
+    |<------ 200 OK -----------------------------|
+    |                                            |
+    
+    Polling for fetching a message from the agent
+    |                                            |
+    |------- GET System/Messages --------------->|
+    |------- 200 OK -----------------------------|
+    |                                            |
+
+```
+
 ## Config.cs
 
 "Config.cs" is a config file for this application. However, it is not included in this repo for security/privacy reasons. Create "Config.cs" with the following constants in the "Scripts" folder:
