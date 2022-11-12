@@ -51,6 +51,10 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
+		// A
+		[Tooltip("EventSystem for Salesforce chat window")]
+		public GameObject EventSystem;
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -73,6 +77,8 @@ namespace StarterAssets
 		private GameObject _mainCamera;
 
 		private const float _threshold = 0.01f;
+
+		private bool _suspended = false;  // A
 
 		private bool IsCurrentDeviceMouse
 		{
@@ -112,9 +118,20 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			JumpAndGravity();
-			GroundedCheck();
-			Move();
+			// A
+			if (_input.suspend)
+            {
+				_suspended = !_suspended;
+				EventSystem.SetActive(_suspended);
+				_input.suspend = false;
+			}
+
+			if (!_suspended)  // A
+			{
+				JumpAndGravity();
+				GroundedCheck();
+				Move();
+			}
 		}
 
 		private void LateUpdate()

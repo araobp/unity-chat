@@ -12,6 +12,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool suspend;  // A
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -43,6 +44,12 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
+
+		// A
+		public void OnSuspend(InputValue value)
+        {
+			SuspendInput(value.isPressed);
+        }
 #endif
 
 
@@ -75,6 +82,12 @@ namespace StarterAssets
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
+
+		// A
+		private void SuspendInput(bool newSuspendState)
+        {
+			suspend = newSuspendState;
+        }
 	}
 	
 }
