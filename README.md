@@ -116,7 +116,6 @@ PlayerCapsule GameObject:
 
 - Add a button to disable/enable WASD control for First Person Character Controller.
 - Capture a scene with Unity Camera and transfer the image to the Salesforce Live Agent via chat.
-- Develop a Lightning Web Components (LWC) to show the image transferred from Unity via chat.
 
 ## References
 
