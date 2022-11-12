@@ -5,12 +5,20 @@ It also means Salesforce CRM integration with Unity.
 <table>
     <tr>
         <td>
-            <img src="./doc/ServiceConsole.jpg" width=450>
-        </td>
-        <td>
             <img src="./doc/UnityGame.jpg" width=450>
         </td>
+        <td>
+            <img src="./doc/ServiceConsole.jpg" width=450>
+        </td>
     </tr>
+    <tr>
+        <td>
+            Unity
+        </td>
+        <td>
+            Salesforce Service Console
+        </td>
+    </tr> 
 </table>
     
 ```
