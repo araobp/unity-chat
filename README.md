@@ -101,6 +101,7 @@ Refer to [this document](https://developer.salesforce.com/docs/atlas.en-us.nover
 Uncheck the checkbox in the yellow circle in the following fig so that a user of this app can enter chat messages in the Input Field:
 
 PlayerCapsule GameObject:
+
 <img src="./doc/CursorLocked.jpg" width=400>
 
 ## References
