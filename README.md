@@ -2,10 +2,17 @@
 
 It also means Salesforce CRM integration with Unity.
 
-<img src="./doc/ServiceConsole.jpg" width=500>
-
-<img src="./doc/UnityGame.jpg" width=500>
-
+<table>
+    <tr>
+        <td>
+            <img src="./doc/ServiceConsole.jpg" width=450>
+        </td>
+        <td>
+            <img src="./doc/UnityGame.jpg" width=450>
+        </td>
+    </tr>
+</table>
+    
 ```
     VIRTUAL WORLD                                         REAL WORLD
 
