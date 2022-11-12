@@ -2,6 +2,27 @@
 
 It also means Salesforce CRM integration with Unity.
 
+(Work in progress)
+
+<table>
+    <tr>
+        <td>
+            <img src="./doc/UnityGame.jpg" width=450>
+        </td>
+        <td>
+            <img src="./doc/ServiceConsole.jpg" width=450>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Unity
+        </td>
+        <td>
+            Salesforce Service Console
+        </td>
+    </tr> 
+</table>
+    
 ```
     VIRTUAL WORLD                                         REAL WORLD
 
@@ -76,6 +97,25 @@ public class Config : MonoBehaviour
 ```
 
 Refer to [this document](https://developer.salesforce.com/docs/atlas.en-us.noversion.service_sdk_ios.meta/service_sdk_ios/live_agent_cloud_setup_get_settings.htm) to get your chat settings from your organization.
+
+## First Person Character Controller
+
+This app uses [Starter Assets - First Person Character Controller](https://assetstore.unity.com/packages/essentials/starter-assets-first-person-character-controller-196525) to navigate the user in the 3D virtual world.
+
+<img src="./doc/UnityScene.jpg" width=450>
+
+## Uncheck the Cursor Locked checkbox
+
+Uncheck the checkbox in the yellow circle in the following fig so that a user of this app can enter chat messages in the Input Field:
+
+PlayerCapsule GameObject:
+
+<img src="./doc/CursorLocked.jpg" width=400>
+
+## Wish list
+
+- Add a button to disable/enable WASD control for First Person Character Controller.
+- Capture a scene with Unity Camera and transfer the image to the Salesforce Live Agent via chat.
 
 ## References
 
