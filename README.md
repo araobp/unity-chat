@@ -112,9 +112,12 @@ PlayerCapsule GameObject:
 
 <img src="./doc/CursorLocked.jpg" width=400>
 
+## Tab key as a toggle switch between WASD and uGUI Input Field enablement
+
+Patch: https://github.com/araobp/unity-chat/commit/25ae2f090f98cbf649396e20b6333433528b4852
+
 ## Wish list
 
-- Add a button to disable/enable WASD control for First Person Character Controller.
 - Capture a scene with Unity Camera and transfer the image to the Salesforce Live Agent via chat.
 
 ## References
