@@ -112,6 +112,12 @@ PlayerCapsule GameObject:
 
 <img src="./doc/CursorLocked.jpg" width=400>
 
+## Wish list
+
+- Add a button to disable/enable WASD control for First Person Character Controller.
+- Capture a scene with Unity Camera and transfer the image to the Salesforce Live Agent via chat.
+- Develop a Lightning Web Components (LWC) to show the image transferred from Unity via chat.
+
 ## References
 
 - [Chat REST API Developer Guide](https://resources.docs.salesforce.com/240/latest/en-us/sfdc/pdf/chat_rest.pdf)
