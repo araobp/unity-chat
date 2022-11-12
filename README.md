@@ -2,6 +2,8 @@
 
 It also means Salesforce CRM integration with Unity.
 
+(Work in progress)
+
 <table>
     <tr>
         <td>
@@ -95,6 +97,12 @@ public class Config : MonoBehaviour
 ```
 
 Refer to [this document](https://developer.salesforce.com/docs/atlas.en-us.noversion.service_sdk_ios.meta/service_sdk_ios/live_agent_cloud_setup_get_settings.htm) to get your chat settings from your organization.
+
+## First Person Character Controller
+
+This app uses [Starter Assets - First Person Character Controller](https://assetstore.unity.com/packages/essentials/starter-assets-first-person-character-controller-196525) to navigate the user in the 3D virtual world.
+
+<img src="./doc/UnityScene.jpg" width=450>
 
 ## Uncheck the Cursor Locked checkbox
 
