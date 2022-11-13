@@ -118,7 +118,9 @@ Patch: https://github.com/araobp/unity-chat/commit/25ae2f090f98cbf649396e20b6333
 
 ## Auto-creation of Contact and Case records
 
-You need to set "prechatDetails" and "prechatEntities" to ChasitorInit like the following code: [SalesforceChat.cs](./SalesforceChat/Assets/Scripts/SalesforceChat.cs)
+It is necessary to send data on your prechat form to the REST API server for auto-creation of Contact and Case records.
+
+In case of REST API client (not prechat form), you need to set "prechatDetails" and "prechatEntities" to ChasitorInit like the following code: [SalesforceChat.cs](./SalesforceChat/Assets/Scripts/SalesforceChat.cs)
 
 Snippet
 ```
