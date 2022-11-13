@@ -116,7 +116,7 @@ PlayerCapsule GameObject:
 
 Patch: https://github.com/araobp/unity-chat/commit/25ae2f090f98cbf649396e20b6333433528b4852
 
-## Auto-creation of Contact and Case records
+## Auto-creation of Contact and Case records (CRM part)
 
 It is necessary to send data on your prechat form to the REST API server for auto-creation of Contact and Case records.
 
