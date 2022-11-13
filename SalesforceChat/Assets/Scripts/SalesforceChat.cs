@@ -216,7 +216,7 @@ public class SalesforceChat : RestClient
                 Debug.Log(JsonConvert.SerializeObject(body));
                 Debug.Log(err);
 
-                m_ChatMessages.text = m_ChatMessages.text + "\n" + $"{Config.VISITOR_NAME}: {inputText}";
+                m_ChatMessages.text = m_ChatMessages.text + "\n" + $"{m_LastName}: {inputText}";
             });
         }
     }
