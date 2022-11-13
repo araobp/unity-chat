@@ -120,7 +120,7 @@ Patch: https://github.com/araobp/unity-chat/commit/25ae2f090f98cbf649396e20b6333
 
 ### Transferring images
 
-Capture a scene with Unity Camera and transfer the image to the Salesforce Live Agent via chat. Unfortunately, Salesforce Chat REST API does not support file transfer...
+Capture a scene with Unity Camera and transfer the image to the Salesforce Live Agent via chat. Unfortunately, Salesforce Chat REST API does not support file transfer at the moment...
 
 ## References
 
