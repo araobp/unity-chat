@@ -73,7 +73,7 @@ It also means Salesforce CRM integration with Unity.
 
 ```
 
-## Config.cs
+## [Unity] Config.cs
 
 "Config.cs" is a config file for this application. However, it is not included in this repo for security/privacy reasons. Create "Config.cs" with the following constants in the "Scripts" folder:
 
@@ -98,13 +98,13 @@ public class Config : MonoBehaviour
 
 Refer to [this document](https://developer.salesforce.com/docs/atlas.en-us.noversion.service_sdk_ios.meta/service_sdk_ios/live_agent_cloud_setup_get_settings.htm) to get your chat settings from your organization.
 
-## First Person Character Controller
+## [Unity] First Person Character Controller
 
 This app uses [Starter Assets - First Person Character Controller](https://assetstore.unity.com/packages/essentials/starter-assets-first-person-character-controller-196525) to navigate the user in the 3D virtual world.
 
 <img src="./doc/UnityScene.jpg" width=450>
 
-## Uncheck the Cursor Locked checkbox
+## [Unity] Uncheck the Cursor Locked checkbox
 
 Uncheck the checkbox in the yellow circle in the following fig so that a user of this app can enter chat messages in the Input Field:
 
@@ -112,11 +112,11 @@ PlayerCapsule GameObject:
 
 <img src="./doc/CursorLocked.jpg" width=400>
 
-## Tab key as a toggle switch between WASD and uGUI Input Field enablement
+## [Unity] Tab key as a toggle switch between WASD and uGUI Input Field enablement
 
 Patch: https://github.com/araobp/unity-chat/commit/25ae2f090f98cbf649396e20b6333433528b4852
 
-## Auto-creation of Contact and Case records (CRM part)
+## [Unity/Salesforce] Auto-creation of Contact and Case records (CRM part)
 
 It is necessary to send data on your prechat form to the REST API server for auto-creation of Contact and Case records.
 
