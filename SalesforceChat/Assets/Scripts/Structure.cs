@@ -105,10 +105,53 @@ public class ChasitorInit
     public string language { get; }  = Config.LANGUAGE;
     public string screenResolution { get; } = Config.SCREEN_RESOLUTION;
     public string visitorName { get; } = Config.VISITOR_NAME;
-    public List<string> prechatDetails = new List<string>();
-    public List<string> prechatEntities = new List<string>();
+    public List<CustomDetail> prechatDetails = new List<CustomDetail>();
+    public List<Entity> prechatEntities = new List<Entity>();
     public bool receiveQueueUpdates { get; }  = true;
     public bool isPost { get; }  = true;
+}
+
+public class EntityFieldMaps
+{
+    public string entityName;
+    public string fieldName;
+    public bool isFastFillable = false;
+    public bool isAutoQueryable = true;
+    public bool isExactMatchable = true;
+}
+
+public class CustomDetail
+{
+    public string label;
+    public string value;
+    public List<EntityFieldMaps> entityFieldMaps = new List<EntityFieldMaps>();
+    public List<string> transcriptFields = new List<string>();
+    public bool displayToAgent = true;
+}
+
+public class EntityFieldsMaps
+{
+    public string fieldName;
+    public string label;
+    public bool doFind = true;
+    public bool isExactMath = true;
+    public bool doCreate = true;
+}
+
+public class Entity
+{
+    public string entityName;
+    public bool showOnCreate = true;
+    public string linkToEntityName;
+    public string linkToEntityField;
+    public string saveToTranscript;
+    public List<EntityFieldsMaps> entityFieldsMaps = new List<EntityFieldsMaps>();
+}
+
+public class Message
+{
+    public string type;
+    public ChatMessageFromAgent message;
 }
 
 public class Messages
@@ -116,12 +159,6 @@ public class Messages
     public List<Message> messages;
     public int offset;
     public int sequence;
-}
-
-public class Message
-{
-    public string type;
-    public ChatMessageFromAgent message;
 }
 
 public class ChatMessageFromAgent
