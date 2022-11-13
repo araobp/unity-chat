@@ -134,6 +134,24 @@ Snippet
             chasitorInit.prechatEntities.Add(case_);
 ```
 
+## [Salesforce] Apex code for deleting LiveChatTranscript records
+
+You might need to delete LiveChatTranscript records from your data storage sometimes, because LiveChatTranscript consumes a lot of data storage.
+
+In that case, the following Apex code is useful:
+
+```
+public class ClearLiveChatTranscript {
+
+    public static void clear() {
+        LiveChatTranscript[] records = [SELECT Id FROM LiveChatTranscript];
+                
+        delete records;
+    }
+    
+}
+```
+
 ## Wish list
 
 ### Transferring images
