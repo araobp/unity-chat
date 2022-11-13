@@ -1,6 +1,7 @@
 code_snippet.txt
 Config.cs
 Config.cs.meta
+mono_crash.*
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #
