@@ -116,6 +116,20 @@ PlayerCapsule GameObject:
 
 Patch: https://github.com/araobp/unity-chat/commit/25ae2f090f98cbf649396e20b6333433528b4852
 
+## Auto-creation of Contact and Case records
+
+You need to set "prechatDetails" and "prechatEntities" to ChasitorInit like the following code: [SalesforceChat.cs](./SalesforceChat/Assets/Scripts/SalesforceChat.cs)
+
+Snippet
+```
+            chasitorInit.prechatDetails.Add(firstName);
+            chasitorInit.prechatDetails.Add(lastName);
+            chasitorInit.prechatDetails.Add(phone);
+            chasitorInit.prechatDetails.Add(subject);
+            chasitorInit.prechatEntities.Add(contact);
+            chasitorInit.prechatEntities.Add(case_);
+```
+
 ## Wish list
 
 ### Transferring images
@@ -130,3 +144,4 @@ Screen sharing between the client and the agent.
 
 - [Chat REST API Developer Guide](https://resources.docs.salesforce.com/240/latest/en-us/sfdc/pdf/chat_rest.pdf)
 - [Get Chat Settings from Your Org](https://developer.salesforce.com/docs/atlas.en-us.noversion.service_sdk_ios.meta/service_sdk_ios/live_agent_cloud_setup_get_settings.htm)
+
