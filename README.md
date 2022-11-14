@@ -44,7 +44,7 @@ It also means Salesforce CRM integration with Unity.
 - Virtual retail stores
 - Virtual sightseeing
 
-### [Salesforce] Pre-chat form settings
+## [Salesforce] Pre-chat form settings
 
 <table>
 <tr>
@@ -58,7 +58,6 @@ It also means Salesforce CRM integration with Unity.
 </table>
 
 <img src="./doc/PrechatFormEmbedded.jpg" width=200>
-Pre-chat form
 
 ## [Unity/Salesforce] Salesforce Chat REST API message sequence diagram
 
